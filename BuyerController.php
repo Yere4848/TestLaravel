@@ -37,11 +37,18 @@ class BuyerController extends Controller
 
     public function store(Request $request)
     {
-        BuyerModel::updateOrCreate(
-            ['buyerID' => $request->buyerID],
-            ['buyerName' => $request->buyerName]
-        );        
-   
+        $data = BuyerModel::where('buyerID', $request->buyerID)->first();
+        $id = $request->buyerID;
+        if ($data !== null) {
+            $data = BuyerModel::where('buyerID', $id)->update(['buyerName' => $request->buyerName]);
+        } else {
+            $data = BuyerModel::create([
+                'buyerID' => $request->buyerID,
+                'buyerName' => $request->buyerName,
+            ]);
+        }
+
+        // return response()->json($data1);
         return response()->json(['success'=>'Buyer saved successfully.']);
     }
 

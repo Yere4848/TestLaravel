@@ -116,6 +116,7 @@
             $('#buyerForm').trigger("reset");
             $('#modelHeading').html("Create New Buyer");
             $('#ajaxModel').modal('show');
+            $("#buyerID").attr('readonly',false);
         });
     
     $('body').on('click', '.editBuyer', function () {
@@ -132,7 +133,7 @@
     
     $('#saveBtn').click(function (e) {
         e.preventDefault();
-        $(this).html('Sending..');
+        // $(this).html('Sending..');
     
         $.ajax({
             data: $('#buyerForm').serialize(),
